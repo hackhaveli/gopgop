@@ -61,7 +61,7 @@ export function PricingSection() {
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Lifetime Deal</h3>
                 <div className="flex items-center justify-center mb-6">
-                  <span className="text-4xl font-bold">₹1499</span>
+                  <span className="text-4xl font-bold">₹199</span>
                   <span className="text-muted-foreground ml-2">/ $19 one-time</span>
                 </div>
                 <div className="space-y-3 text-left mb-8">
