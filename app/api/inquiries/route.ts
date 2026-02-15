@@ -168,6 +168,7 @@ export async function PATCH(request: NextRequest) {
         }
 
         // Update inquiry
+        // @ts-ignore - Database types may be out of sync with actual schema
         const { data, error } = await supabase
             .from('inquiries')
             .update({ status })

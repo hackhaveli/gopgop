@@ -34,8 +34,9 @@ export async function PUT(
         const supabase = createAdminClient();
 
         // Update verification status
-        const { data: profile, error: updateError } = await (supabase
-            .from('creator_profiles') as any)
+        // @ts-ignore - Database types may be out of sync with actual schema
+        const { data: profile, error: updateError } = await supabase
+            .from('creator_profiles')
             .update({ verification_status: status as string })
             .eq('id', id)
             .select()

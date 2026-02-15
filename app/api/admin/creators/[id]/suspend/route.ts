@@ -43,8 +43,9 @@ export async function PUT(
         // Update verification status to reflect suspension
         const newStatus = suspend ? 'rejected' : 'verified';
 
-        const { data: updated, error: updateError } = await (supabase
-            .from('creator_profiles') as any)
+        // @ts-ignore - Database types may be out of sync with actual schema
+        const { data: updated, error: updateError } = await supabase
+            .from('creator_profiles')
             .update({ verification_status: newStatus as string })
             .eq('id', id)
             .select()

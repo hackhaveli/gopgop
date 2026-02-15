@@ -119,6 +119,7 @@ export default function CreatorOnboarding() {
             }
 
             // Update profile
+            // @ts-ignore - Database types may be out of sync with actual schema
             const { error: profileError } = await supabase
                 .from('creator_profiles')
                 .update({
@@ -130,9 +131,9 @@ export default function CreatorOnboarding() {
                     contact_email: formData.email,
                     instagram_followers: parseInt(formData.followersRange.replace(/[^0-9]/g, '')) || 0,
                     bio: formData.bio,
-                    verification_status: 'pending' as const,
+                    verification_status: 'pending',
                     updated_at: new Date().toISOString(),
-                } as any)
+                })
                 .eq('user_id', user.id);
 
             if (profileError) {
