@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { createRouteClient } from '@/lib/supabase';
+import { createRouteClient } from '@/lib/supabase-server';
 import { successResponse, errorResponse, handleError } from '@/lib/api-response';
 
 /**
