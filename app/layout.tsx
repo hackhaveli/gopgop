@@ -3,18 +3,17 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { Navbar } from '@/components/navbar';
+import { Preloader } from '@/components/preloader';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'WebKarigar - Professional Website Solutions',
-  description: 'Scrape websites, extract data, and auto-generate ready-to-sell templates.',
+  title: 'GopGop - Find & Close Micro-Influencer Deals Faster',
+  description: 'Discover Indian creators by niche, city & views. See real reels. Shortlist. Contact instantly.',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: '/logo.png',
   },
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -24,6 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Preloader />
           <Navbar />
           {children}
         </ThemeProvider>

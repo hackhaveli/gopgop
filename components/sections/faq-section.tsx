@@ -11,34 +11,44 @@ import {
 
 const faqs = [
   {
-    question: "Is it beginner friendly?",
+    question: "How is GopGop different from other influencer platforms?",
     answer:
-      "Yes! Our tool is designed with a user-friendly interface that requires no coding knowledge. Simply upload your list of websites, and our system handles all the technical aspects of scraping and template generation.",
+      "GopGop focuses on micro-influencers with proof-based discovery. We show real reels, actual views (not just followers), and verified work. No fake stats, no middlemen.",
   },
   {
-    question: "Can I resell the websites?",
+    question: "Do you scrape Instagram data?",
     answer:
-      "Absolutely! That's the main purpose of our tool. You retain 100% ownership of all generated templates and can sell them to businesses without any restrictions or royalty fees.",
+      "No. All data is user-submitted. Creators voluntarily add their reel URLs and stats. We don't scrape or violate any platform policies.",
   },
   {
-    question: "Do I need coding knowledge?",
+    question: "Can creators really get brand deals?",
     answer:
-      "No coding knowledge is required. The tool automatically extracts data and creates professional templates. However, if you wish to make custom adjustments, basic HTML/CSS knowledge can be helpful but not necessary.",
+      "Yes! Professional media kits significantly increase your chances. Brands prefer creators who look professional and have easy-to-share portfolios.",
   },
   {
-    question: "How do I get updates?",
+    question: "What if Instagram embeds fail to load?",
     answer:
-      "As a lifetime member, you'll receive all future updates for free. We regularly add new features, template designs, and improve our scraping algorithms based on user feedback.",
+      "If Instagram blocks embeds (rare), we show a clickable link card instead. Your media kit page will never break.",
   },
   {
-    question: "How many websites can I generate?",
+    question: "Is there a free option for creators?",
     answer:
-      "There are no limits on the number of websites you can generate. Our one-time purchase gives you unlimited usage without any hidden fees or charges.",
+      "Yes! Free plan includes 3 reel embeds and a basic media kit page. Perfect to test the platform before upgrading to Starter plan.",
   },
   {
-    question: "Is there a refund policy?",
+    question: "Can I cancel my subscription anytime?",
     answer:
-      "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the tool for any reason, contact our support team within 30 days of purchase for a full refund.",
+      "Absolutely. No contracts, no lock-ins. Cancel anytime from your dashboard. Your media kit stays live until the current billing period ends.",
+  },
+  {
+    question: "How do brands contact creators?",
+    answer:
+      "Creators add WhatsApp number and/or email on their media kit. Brands can reach out directly. No commission, no middlemen.",
+  },
+  {
+    question: "What about privacy and data security?",
+    answer:
+      "We don't sell your data. Your email and phone are only visible to brands when you choose to display them. You control what's public on your media kit.",
   },
 ];
 
@@ -47,42 +57,42 @@ export function FaqSection() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
   return (
-    <section id="faq" ref={sectionRef} className="py-20 md:py-28">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-12">
+    <section id="faq" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-white dark:bg-slate-950">
+      <div className="container mx-auto px-4 relative">
+        <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
               Frequently Asked Questions
             </h2>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <p className="text-lg text-muted-foreground">
-              Everything you need to know about our website generator
+            <p className="text-lg text-muted-foreground font-medium">
+              Got questions? We've got answers to help you get started with <span className="text-violet-600 dark:text-violet-400 font-bold">GopGop</span>.
             </p>
           </motion.div>
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-3xl mx-auto"
         >
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left text-lg font-medium py-5">
+              <AccordionItem key={index} value={`item-${index}`} className="border border-slate-200 dark:border-slate-800 rounded-2xl px-6 bg-slate-50/50 dark:bg-slate-900/50 transition-colors hover:border-violet-500/30">
+                <AccordionTrigger className="text-left text-lg font-bold py-6 hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-muted-foreground text-sm md:text-base font-medium pb-6 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

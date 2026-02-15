@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, ExternalLink, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function LiveDemoSection() {
@@ -11,7 +11,6 @@ export function LiveDemoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showInstallMessage, setShowInstallMessage] = useState(false);
   const [showPreviewMessage, setShowPreviewMessage] = useState(false);
-  const [installStep, setInstallStep] = useState(0);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
   const togglePlayPause = () => {
@@ -24,215 +23,116 @@ export function LiveDemoSection() {
       setIsPlaying(!isPlaying);
     }
   };
-  
-  const handleInstall = () => {
-    setShowInstallMessage(true);
-    setInstallStep(prev => (prev + 1) % 3);
-    
-    // Auto-hide message after 3 seconds
-    setTimeout(() => {
-      setShowInstallMessage(false);
-    }, 3000);
-  };
-  
+
   const handleTestUI = () => {
     setShowPreviewMessage(true);
-    
-    // Auto-hide message after 3 seconds
     setTimeout(() => {
       setShowPreviewMessage(false);
     }, 3000);
   };
 
   return (
-    <section id="demo" ref={sectionRef} className="py-16 md:py-20 lg:py-28">
+    <section id="demo" ref={sectionRef} className="py-24 md:py-32 bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <motion.div
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-black mb-6 tracking-tight"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-              See the Tool in Action
-            </h2>
-          </motion.div>
-          <motion.div
+            See GopGop in Action
+          </motion.h2>
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg text-muted-foreground font-medium max-w-2xl mx-auto"
           >
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 sm:px-0">
-              Watch how easily our tool extracts data from websites and
-              transforms it into beautiful, customized templates in minutes.
-            </p>
-          </motion.div>
+            Watch how fast it is to create a professional, proof-based media kit and get discovered by top brands.
+          </motion.p>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative max-w-5xl mx-auto rounded-xl overflow-hidden border shadow-lg mx-3 sm:mx-4 md:mx-auto"
+          className="relative max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
         >
-          <div className="aspect-video relative overflow-hidden">
-            {/* Video background */}
+          <div className="aspect-video relative overflow-hidden bg-slate-900">
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-contain bg-black"
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
               src="/product_demo.mp4"
               poster="/thumbnail.png"
               muted
               playsInline
+              loop
             ></video>
 
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20"></div>
-            
-            {/* Interactive Demo Preview */}
+            {/* Play/Pause Overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-              <div className="flex flex-col items-center space-y-6">
-                <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-blue-500 flex items-center justify-center cursor-pointer shadow-lg" onClick={togglePlayPause}>
-                  {isPlaying ? (
-                    <Pause className="h-8 w-8 text-white" />
-                  ) : (
-                    <Play className="h-8 w-8 text-white" />
-                  )}
-                </div>
-                <h3 className="text-lg sm:text-xl font-medium text-white">Interactive Demo Preview</h3>
-              </div>
-              <p className="absolute bottom-4 sm:bottom-6 text-foreground bg-background/70 rounded-full py-1 text-xs sm:text-sm text-center px-3">
-                {isPlaying ? "Click to pause" : "Click to see our full product walkthrough"}
-              </p>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={togglePlayPause}
+                className="w-20 h-20 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-2xl"
+              >
+                {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8 ml-1" />}
+              </motion.button>
+              <h3 className="text-xl font-bold text-white mt-6 tracking-tight">Full Product Walkthrough</h3>
+            </div>
+
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/40 backdrop-blur-md rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest text-white">
+              {isPlaying ? "Video Playing" : "Paused • Click to play"}
             </div>
           </div>
 
-          {/* Interactive UI preview simulation */}
-          <div className="bg-black/90 p-6 border-t border-gray-800">
-            {/* Project Card */}
-            <div className="mb-8 bg-gray-800/50 rounded-lg p-4 flex items-center">
-              <div className="h-12 w-12 rounded-lg bg-purple-600 flex items-center justify-center mr-4">
-                <span className="text-white font-medium">W</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="text-white text-sm font-medium">Wallidgardens</h4>
-                <p className="text-gray-400 text-xs">wallidgardens</p>
-              </div>
-              <div className="flex space-x-2">
-                <a 
-                  href="/Wallofgardens.rar" 
-                  download
-                  className="bg-transparent border border-gray-700 text-gray-300 hover:bg-gray-700 text-xs py-1 px-2 rounded flex items-center justify-center"
-                >
-                  Install
-                  {showInstallMessage && (
-                    <span className="absolute -top-10 left-0 right-0 bg-green-600 text-white text-xs py-1 px-2 rounded">
-                      {installStep === 0 && "Template installed successfully!"}
-                      {installStep === 1 && "Generating files..."}
-                      {installStep === 2 && "Setup complete!"}
-                    </span>
-                  )}
-                </a>
-                <div className="relative group">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="bg-transparent border-gray-700 text-gray-300 hover:bg-gray-700 text-xs"
-                  >
-                    <span className="inline-block w-4 h-4">⋯</span>
+          <div className="p-10 border-t border-slate-100 dark:border-slate-800">
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div>
+                <h4 className="text-2xl font-black mb-4 tracking-tight">Live Creator Profile Preview</h4>
+                <p className="text-muted-foreground font-medium mb-6">Experience how brands see your profile. Interactive reel embeds, verified followers count, and direct contact buttons.</p>
+                <div className="flex flex-wrap gap-4">
+                  <Button onClick={handleTestUI} className="rounded-2xl h-14 px-8 font-black bg-violet-600 hover:bg-violet-700">
+                    Try Live Preview
                   </Button>
-                  <div className="absolute right-0 mt-2 w-48 bg-gray-800 border border-gray-700 rounded-md shadow-lg z-20 hidden group-hover:block">
-                    <a 
-                      href="/wallofgardens/modern/index.html" 
-                      download
-                      className="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-700"
-                    >
-                      Download Modern Template
-                    </a>
-                    <a 
-                      href="/wallofgardens/elegant/index.html" 
-                      download
-                      className="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-700"
-                    >
-                      Download Elegant Template
-                    </a>
-                    <a 
-                      href="/wallofgardens/minimalist/index.html" 
-                      download
-                      className="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-700"
-                    >
-                      Download Minimalist Template
-                    </a>
-                  </div>
+                  <Button variant="outline" className="rounded-2xl h-14 px-8 font-black border-2 border-slate-200 dark:border-slate-800">
+                    View Examples
+                  </Button>
                 </div>
-              </div>
-            </div>
-            
-
-            
-            {/* Template Links */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mb-6">
-              <a 
-                href="/wallofgardens/modern/index.html" 
-                className="h-12 bg-gray-800/70 hover:bg-gray-700/70 rounded-md flex items-center justify-center text-white transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="text-xs sm:text-sm font-medium">Modern Template</span>
-              </a>
-              <a 
-                href="/wallofgardens/elegant/index.html" 
-                className="h-12 bg-gray-800/70 hover:bg-gray-700/70 rounded-md flex items-center justify-center text-white transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="text-xs sm:text-sm font-medium">Elegant Template</span>
-              </a>
-              <a 
-                href="/wallofgardens/minimalist/index.html" 
-                className="h-12 bg-gray-800/70 hover:bg-gray-700/70 rounded-md flex items-center justify-center text-white transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="text-xs sm:text-sm font-medium">Minimalist Template</span>
-              </a>
-            </div>
-
-            <div className="flex justify-center relative mb-6">
-              <Button 
-                className="bg-background text-foreground hover:bg-accent/80" 
-                onClick={handleTestUI}
-              >
-                Test UI Preview
                 {showPreviewMessage && (
-                  <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-3 px-4 rounded-lg shadow-lg w-60">
-                    <div className="relative">
-                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-900 rotate-45"></div>
-                      <p className="mb-1 font-semibold">Preview Generated!</p>
-                      <p className="text-gray-300 text-xs">Your template is now ready for viewing</p>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-400 text-sm font-bold"
+                  >
+                    ✨ Preview Generated! Open the preview window to see your kit.
+                  </motion.div>
+                )}
+              </div>
+
+              <div className="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 border border-slate-100 dark:border-slate-800">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-violet-600">
+                      <Download className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black uppercase text-muted-foreground tracking-widest mb-1">Feature</p>
+                      <p className="font-bold">One-Click PDF Export</p>
                     </div>
                   </div>
-                )}
-              </Button>
-            </div>
-            
-            {/* Feature Highlights Section */}
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 px-2 sm:px-4">
-              <div className="bg-card/70 dark:bg-gray-800/70 p-2 sm:p-3 rounded-lg text-center shadow-sm border border-border/30">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-blue-500 dark:text-blue-400 mb-1">100+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground dark:text-gray-300">Template Styles</div>
-              </div>
-              <div className="bg-card/70 dark:bg-gray-800/70 p-2 sm:p-3 rounded-lg text-center shadow-sm border border-border/30">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-green-500 dark:text-green-400 mb-1">90%</div>
-                <div className="text-xs sm:text-sm text-muted-foreground dark:text-gray-300">Time Saved</div>
-              </div>
-              <div className="bg-card/70 dark:bg-gray-800/70 p-2 sm:p-3 rounded-lg text-center shadow-sm border border-border/30">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-purple-500 dark:text-purple-400 mb-1">50K+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground dark:text-gray-300">Data Points Extracted</div>
-              </div>
-              <div className="bg-card/70 dark:bg-gray-800/70 p-2 sm:p-3 rounded-lg text-center shadow-sm border border-border/30">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-amber-500 dark:text-amber-400 mb-1">15+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground dark:text-gray-300">Export Formats</div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-blue-600">
+                      <ExternalLink className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black uppercase text-muted-foreground tracking-widest mb-1">Feature</p>
+                      <p className="font-bold">Custom URL Sharing</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

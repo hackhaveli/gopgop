@@ -2,69 +2,49 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { 
-  Brain, Paintbrush, Laptop, Mail, Globe, Rocket,
-  Zap, Star, ShieldCheck, Smile, Lock, Database
+import {
+  FileText, Video, Search, Filter,
+  Bookmark, IndianRupee, Zap, MessageCircle
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const features = [
   {
-    icon: Brain,
-    title: "Smart Scraping",
-    description: "AI-powered data extraction that identifies key business information automatically.",
-    color: "text-blue-500 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-950",
+    icon: FileText,
+    title: "Creator Media Kit Page",
+    description: "Professional pages with all creator details, stats & proof",
+    color: "text-violet-600",
   },
   {
-    icon: Paintbrush,
-    title: "Multiple Template Designs",
-    description: "Generate various design options to choose from for each business.",
-    color: "text-purple-500 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-950",
+    icon: Video,
+    title: "Instagram Reel Embeds",
+    description: "Show actual work with embedded reels on media kit",
+    color: "text-pink-600",
   },
   {
-    icon: Laptop,
-    title: "Works Offline",
-    description: "Download and run the tool locally without needing constant internet connection.",
-    color: "text-gray-700 dark:text-gray-300",
-    bgColor: "bg-gray-50 dark:bg-gray-900",
+    icon: Search,
+    title: "Proof-Based Discovery",
+    description: "Find creators with verified stats & proof screenshots",
+    color: "text-blue-600",
   },
   {
-    icon: Mail,
-    title: "Email Outreach Built-In",
-    description: "Automated email templates to contact businesses with your proposals.",
-    color: "text-red-500 dark:text-red-400",
-    bgColor: "bg-red-50 dark:bg-red-950",
+    icon: Filter,
+    title: "Smart Filters",
+    description: "Filter by niche, city, views range & engagement",
+    color: "text-emerald-600",
   },
   {
-    icon: Globe,
-    title: "FTP Deployment Support",
-    description: "Deploy finished websites directly to hosting with built-in FTP tools.",
-    color: "text-teal-500 dark:text-teal-400",
-    bgColor: "bg-teal-50 dark:bg-teal-950",
+    icon: Bookmark,
+    title: "Shortlist & Export",
+    description: "Save your favorite creators and export contact details",
+    color: "text-amber-600",
   },
   {
-    icon: Rocket,
-    title: "Fast & Lightweight",
-    description: "Optimized performance for quick template generation without lag.",
-    color: "text-amber-500 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-950",
-  },
-  {
-    icon: Zap,
-    title: "One-Click Generation",
-    description: "Create complete websites with a single click after configuration.",
-    color: "text-yellow-500 dark:text-yellow-400",
-    bgColor: "bg-yellow-50 dark:bg-yellow-950",
-  },
-  {
-    icon: Lock,
-    title: "Secure Processing",
-    description: "All data is processed locally with no external uploads for maximum privacy.",
-    color: "text-emerald-500 dark:text-emerald-400",
-    bgColor: "bg-emerald-50 dark:bg-emerald-950",
+    icon: IndianRupee,
+    title: "₹99 Starter for Creators",
+    description: "Affordable pricing to get started with professional kit",
+    color: "text-cyan-600",
   },
 ];
 
@@ -73,45 +53,61 @@ export function FeaturesSection() {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
   return (
-    <section id="features" ref={sectionRef} className="py-20 md:py-28">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+    <section id="features" ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-white dark:bg-slate-950">
+      <div className="container mx-auto px-4 relative">
+        <div className="max-w-3xl mx-auto text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Powerful Features
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
+              Everything You Need
             </h2>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <p className="text-lg text-muted-foreground">
-              Everything you need to automate your website creation workflow
+            <p className="text-lg text-muted-foreground leading-relaxed font-medium">
+              Powerful tools designed to make Indian influencer marketing
+              <span className="text-violet-600 dark:text-violet-400 font-bold mx-1">Transparent</span> &
+              <span className="text-blue-600 dark:text-blue-400 font-bold mx-1">Fast</span>.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group"
             >
-              <Card className="h-full p-6 transition-all duration-300 hover:shadow-md hover:border-primary/50">
-                <div className="flex flex-col h-full">
-                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center mb-4", feature.bgColor)}>
-                    <feature.icon className={cn("h-6 w-6", feature.color)} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground flex-grow">{feature.description}</p>
+              <Card className="relative h-full p-8 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-300 hover:border-violet-500/50 rounded-3xl">
+                {/* Simple Icon Presentation */}
+                <div className="mb-6">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className={cn(
+                      "w-12 h-12 rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700",
+                      feature.color
+                    )}
+                  >
+                    <feature.icon className="h-6 w-6" />
+                  </motion.div>
                 </div>
+
+                <h3 className="text-xl font-bold mb-3 tracking-tight group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed font-medium">
+                  {feature.description}
+                </p>
               </Card>
             </motion.div>
           ))}

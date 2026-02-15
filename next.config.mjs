@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Removed 'output: export' to enable API routes and dynamic features
   images: { unoptimized: true },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
