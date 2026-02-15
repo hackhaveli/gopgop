@@ -130,9 +130,9 @@ export default function CreatorOnboarding() {
                     contact_email: formData.email,
                     instagram_followers: parseInt(formData.followersRange.replace(/[^0-9]/g, '')) || 0,
                     bio: formData.bio,
-                    verification_status: 'pending',
+                    verification_status: 'pending' as const,
                     updated_at: new Date().toISOString(),
-                })
+                } as any)
                 .eq('user_id', user.id);
 
             if (profileError) {
